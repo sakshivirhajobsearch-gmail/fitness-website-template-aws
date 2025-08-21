@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.example</groupId>
+  <artifactId>fitness-website</artifactId>
+  <version>1.0.0</version>
+  <name>Fitness Website (Static)</name>
+  <description>Static website packaged as a distributable ZIP via Maven.</description>
+  <packaging>pom</packaging>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.6.0</version>
+        <configuration>
+          <finalName>${project.artifactId}-${project.version}</finalName>
+          <appendAssemblyId>false</appendAssemblyId>
+          <formats>
+            <format>zip</format>
+          </formats>
+          <includeBaseDirectory>false</includeBaseDirectory>
+          <fileSets>
+            <fileSet>
+              <directory>${project.basedir}/fitness-website-template</directory>
+              <outputDirectory>/</outputDirectory>
+              <excludes>
+                <exclude>**/.git/**</exclude>
+                <exclude>**/.github/**</exclude>
+                <exclude>**/node_modules/**</exclude>
+                <exclude>**/.DS_Store</exclude>
+              </excludes>
+            </fileSet>
+          </fileSets>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-zip</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

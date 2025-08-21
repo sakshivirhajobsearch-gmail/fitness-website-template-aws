@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Installing zip if needed"
+      - which zip || (yum install -y zip || (apt-get update && apt-get install -y zip))
+  build:
+    commands:
+      - echo "Packaging static site"
+      - zip -r artifact-1.zip fitness-website-template -x "**/.git/**" "**/.github/**" "**/node_modules/**" "**/.DS_Store"
+artifacts:
+  files:
+    - artifact-1.zip
+  name: "artifact-1"

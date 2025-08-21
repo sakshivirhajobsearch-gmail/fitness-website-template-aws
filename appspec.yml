@@ -1,0 +1,11 @@
+version: 0.0
+os: linux
+files:
+  - source: /fitness-website-template
+    destination: /var/www/html
+    overwrite: true
+hooks:
+  AfterInstall:
+    - location: scripts/reload-web.sh
+      timeout: 180
+      runas: root
